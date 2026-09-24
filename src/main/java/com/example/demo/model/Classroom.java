@@ -7,11 +7,30 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "classrooms")
 public class Classroom {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String course_code;
+
+    @Column(nullable = false)
+    private String semester;
+
+    @ManyToOne
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private User teacher;
+
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
+    private List<Assignment> assignments;
 }
