@@ -22,12 +22,22 @@ public class PullRequestController {
         return pullRequestRepository.findAll();
     }
 
-    //
+    //http://localhost:3001/compunet2-2026/pull-requests/c1
     @GetMapping("/c1")
     public List<PullRequest> c1() {
-        return pullRequestRepository.findByRepository_Assignment_Classroom_NameAndStatus(
+        return pullRequestRepository.findByRepository_Assignment_Classroom_NameAndStatusOrderByCreatedAtDesc(
                 "Computacion en Internet II - Grupo 1",
                 "OPEN"
+        );
+    }
+
+    //http://localhost:3001/compunet2-2026/pull-requests/c3
+    @GetMapping("/c3")
+    public List<PullRequest> c3() {
+        return pullRequestRepository.findByReviewer_RoleAndAuthor_UsernameAndRepository_Assignment_Classroom_Semester(
+                "TA",
+                "cjimenez",
+                "2026-02"
         );
     }
 }

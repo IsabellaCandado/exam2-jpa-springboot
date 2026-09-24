@@ -20,4 +20,14 @@ public class AssignmentController {
     public List<Assignment> findAllAssignments() {
         return assignmentRepository.findAll();
     }
+
+    //http://localhost:3001/compunet2-2026/assignments/c5
+    @GetMapping("/c5")
+    public List<Assignment> c5() {
+        return assignmentRepository.findByClassroom_Teacher_UsernameAndRepositories_PullRequests_Reviewer_UsernameAndRepositories_PullRequests_Status(
+                "krodriguez",
+                "jvalencia",
+                "MERGED"
+        );
+    }
 }

@@ -20,4 +20,14 @@ public class CommitController {
     public List<Commit> findAllCommits() {
         return commitRepository.findAll();
     }
+
+    //http://localhost:3001/compunet2-2026/commits/c4
+    @GetMapping("/c4")
+    public List<Commit> c4() {
+        return commitRepository.findByRepository_ParentRepoIsNotNullAndRepository_ParentRepo_IsTemplateTrueAndRepository_ParentRepo_NameAndMessageContainingIgnoreCaseAndLinesAddedGreaterThan(
+                "template-jpa-exam",
+                "fix",
+                50
+        );
+    }
 }

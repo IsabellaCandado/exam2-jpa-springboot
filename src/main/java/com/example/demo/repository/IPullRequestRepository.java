@@ -2,12 +2,16 @@ package com.example.demo.repository;
 
 import com.example.demo.model.PullRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface IPullRequestRepository extends JpaRepository<PullRequest, Long> {
+@Repository
+public interface IPullRequestRepository extends JpaRepository<PullRequest, Integer> {
 
-    //List<PullRequest> findByAuthor_Classrooms_NameAndStatusOrderByCreatedAtDesc(String classroomName, String status);
+    //c1
+    List<PullRequest> findByRepository_Assignment_Classroom_NameAndStatusOrderByCreatedAtDesc(String classroomName, String status);
 
-    List<PullRequest> findByRepository_Assignment_Classroom_NameAndStatus(String classroomName, String status);
+    //c3
+    List<PullRequest> findByReviewer_RoleAndAuthor_UsernameAndRepository_Assignment_Classroom_Semester(String reviewerRole, String authorUsername, String classroomSemester);
 }
